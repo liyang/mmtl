@@ -131,11 +131,11 @@ int nmmtl_merge_die_subseg(int orientation,int *segment_number,
   {
     
 #ifdef DIAG_MERGE_DIE
-    fprintf(stderr,"looping on list1:");
-    fprintf(stderr,"  %s ",
+    printf("looping on list1:");
+    printf("  %s ",
 	    orientation == VERTICAL_ORIENTATION ?
 	    "vertical" : "horizontal");
-    fprintf(stderr," at: %1.1g, start: %1.1g, end: %1.1g\n",list1->at,
+    printf(" at: %1.1g, start: %1.1g, end: %1.1g\n",list1->at,
 	    list1->start,list1->end);
 #endif	
     
@@ -147,11 +147,11 @@ int nmmtl_merge_die_subseg(int orientation,int *segment_number,
       restart_2 = 0;
       
 #ifdef DIAG_MERGE_DIE
-      fprintf(stderr,"restarting list2:");
-      fprintf(stderr,"  %s ",
+      printf("restarting list2:");
+      printf("  %s ",
 	      orientation == VERTICAL_ORIENTATION ?
 	      "vertical" : "horizontal");
-      fprintf(stderr," at: %1.1g, start: %1.1g, end: %1.1g\n",list2->at,
+      printf(" at: %1.1g, start: %1.1g, end: %1.1g\n",list2->at,
 	      list2->start,list2->end);
 #endif	
       
@@ -163,31 +163,31 @@ int nmmtl_merge_die_subseg(int orientation,int *segment_number,
       {
 	
 #ifdef DIAG_MERGE_DIE
-	fprintf(stderr,"segment overlap");
-	fprintf(stderr,"  orientation = %s\n",
+	printf("segment overlap");
+	printf("  orientation = %s\n",
 		orientation == VERTICAL_ORIENTATION ?
 		"vertical" : "horizontal");
-	fprintf(stderr,"  at: %1.1g, left: %1.1g, right: %1.1g\n",list1->at,
+	printf("  at: %1.1g, left: %1.1g, right: %1.1g\n",list1->at,
 		overlap_left,overlap_right);
 	switch(left_overhang)
 	{
 	case 1:
-	  fprintf(stderr,"  left_overhang 1: (%1.1g to %1.1g)\n",list1->start,
+	  printf("  left_overhang 1: (%1.1g to %1.1g)\n",list1->start,
 		  overlap_left);
 	  break;
 	case 2:
-	  fprintf(stderr,"  left_overhang 2: (%1.1g to %1.1g)\n",list2->start,
+	  printf("  left_overhang 2: (%1.1g to %1.1g)\n",list2->start,
 		  overlap_left);
 	  break;
 	}
  	switch(right_overhang)
 	{
 	case 1:
-	  fprintf(stderr,"  right_overhang 1: (%1.1g to %1.1g)\n",
+	  printf("  right_overhang 1: (%1.1g to %1.1g)\n",
                   overlap_right,list1->end);
 	  break;
 	case 2:
-	  fprintf(stderr,"  right_overhang 2: (%1.1g to %1.1g)\n",
+	  printf("  right_overhang 2: (%1.1g to %1.1g)\n",
                   overlap_right,list2->end);
 	  break;
 	}
@@ -348,7 +348,7 @@ int nmmtl_merge_die_subseg(int orientation,int *segment_number,
       if(restart_2 == 1)
       {
 #ifdef DIAG_MERGE_DIE
-	fprintf(stderr,"restarting list2\n");	  
+	printf("restarting list2\n");	  
 #endif	
 	list2 = *seg2;
 	prev2 = NULL;
@@ -360,7 +360,7 @@ int nmmtl_merge_die_subseg(int orientation,int *segment_number,
     /* reached the end of list 2, advance list 1 and rescan list 2 */
     
 #ifdef DIAG_MERGE_DIE
-    fprintf(stderr,"advance list 1\n");
+    printf("advance list 1\n");
 #endif	
     prev1 = list1;
     if(list1 != NULL) list1 = list1->next;

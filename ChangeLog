@@ -1,6 +1,60 @@
 ChangeLog
 
 
+2004-07-29 techenti
+
+	Tagged TNT 1.2.1
+
+	* examples/example-microstrip-2.xsctn 1.3 (changed):
+		Added ground thickness and corrected conductivity.
+	* doc/user-guide.tex 1.6 (changed):
+		Added limitations for wavelet simulators.
+	* examples/example-stripline-2.xsctn 1.3 (changed):
+		Corrected conductivity.
+	* calcCAP/lib/calcCAP.tcl 1.7 (changed):
+		Corrected RectangleDielectric support, although 
+		the simulator does not support it.
+	* calcRL/lib/calcRL.tcl 1.8 (changed):
+		Removed hardcoded ground plane thickness (10 microns)
+
+2004-07-28 techenti
+	* bem/src/math_library.cpp 1.2 (changed):
+	* bem/src/nmmtl_det_arc_intersections.cpp 1.2 (changed):
+	* bem/src/nmmtl_det_intersections.cpp 1.2 (changed):
+	* bem/src/nmmtl_fill_die_gaps.cpp 1.3 (changed):
+	* bem/src/nmmtl_find_ground_planes.cpp 1.3 (changed):
+	* bem/src/nmmtl_find_nu.cpp 1.2 (changed):
+	* bem/src/nmmtl_orphans.cpp 1.3 (changed):
+	* bem/src/nmmtl_overlap_parallel_seg.cpp 1.2 (changed):
+		Added "\n" to printed ELECTRO warnings and error messages.
+	* bem/lib/bem_welement.itcl 1.5 (changed):
+		Added visitRectangleDielectric to fix error when 
+		generating W elements.
+	* bem/src/nmmtl.cpp 1.4 (changed):
+	* bem/src/nmmtl_fill_die_gaps.cpp 1.2 (changed):
+	* bem/src/nmmtl_find_ground_planes.cpp 1.2 (changed):
+	* bem/src/nmmtl_form_die_subseg.cpp 1.2 (changed):
+	* bem/src/nmmtl_merge_die_subseg.cpp 1.2 (changed):
+	* bem/src/nmmtl_orphans.cpp 1.2 (changed):
+		Changed stderr to stdout for warnings and diagnostics.
+	* calcCAP/lib/calcCAP.tcl 1.6 (changed):
+		Typo.  (Misspelled -height as -thickness.)
+	* calcCAP/lib/calcCAP.tcl 1.5 (changed):
+	* calcRL/lib/calcRL.tcl 1.7 (changed):
+		Added RectangleDielectrics
+	* bem/lib/bem_sweep.tcl 1.7 (changed):
+	* csdl/csdl_hlcsdl.itcl 1.6 (changed):
+		Added ground plane thickness.
+
+2004-07-26 techenti
+	* doc/user-guide.tex 1.5 (changed):
+		Added license section.  Updated Windows installation 
+		and package dependencies.
+	* gui/gui_help.tcl 1.7 (changed):
+		Fixed for file names with spaces.
+	* gui/canvas_functions.tcl 1.7 (changed):
+		Removed dependence on tcllib (fileutils::tempfile).
+	
 2004-07-21 techenti
 
 	Tagged TNT 1.2.0

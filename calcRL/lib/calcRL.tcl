@@ -3,7 +3,7 @@
 #  calcRL.tcl
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved.
-#  $Id: calcRL.tcl,v 1.6 2004/06/03 20:37:38 techenti Exp $
+#  $Id: calcRL.tcl,v 1.8 2004/07/29 13:03:14 techenti Exp $
 #
 #-----------------------------------------------------------------
 package require Itcl
@@ -32,6 +32,7 @@ proc ::calcRL::genInputFile { nodename frequency } {
     set condList ""
     set circList ""
     set trapList ""
+    set conductivity 5e7
     foreach struct $structureList {
         #--------------------------------------------------------------
         # Add the heights of the ground-planes and dielectrics.
@@ -49,14 +50,16 @@ proc ::calcRL::genInputFile { nodename frequency } {
 	if { $width > $totWidth } {
 	    set totWidth $width
 	}
-	set conductivity [$struct cget -conductivity]
 	if { [$struct isa RectangleConductors] } {
+	    set conductivity [$struct cget -conductivity]
 	    set nRectConds [expr { $nRectConds + [$struct cget -number] }]
 	}
 	if { [$struct isa CircleConductors] } {
+	    set conductivity [$struct cget -conductivity]
 	    set nCircConds [expr { $nCircConds + [$struct cget -number] }]
 	}
 	if { [$struct isa TrapezoidConductors] } {
+	    set conductivity [$struct cget -conductivity]
 	    set nTrapConds [expr { $nTrapConds + [$struct cget -number] }]
 	}
     }
@@ -126,12 +129,15 @@ proc ::calcRL::genInputFile { nodename frequency } {
     set trapList ""
     foreach struct $structureList {
         #--------------------------------------------------------------
-        # Add the heights of the ground-planes and dielectrics.
+        # Ground Planes and Dielectrics
         #--------------------------------------------------------------
         if {[$struct isa GroundPlane] || [$struct isa DielectricLayer]} {
 	    set yat [expr {$yat + [$struct height]}]
 	    continue
         }
+	if {[$struct isa RectangleDielectric]} {
+	    continue
+	}
 
 	set numConds [expr { $numConds + [$struct cget -number] }]    
 	set xat [expr { ( $totWidth + \
@@ -142,7 +148,7 @@ proc ::calcRL::genInputFile { nodename frequency } {
 	    if { [$struct isa RectangleConductors] } {
 		set width [expr { [$struct cget -width] * $scale }]
 		set height [expr { [$struct cget -height] * $scale }]
-		set yloc [expr { $yat * $scale + 0.000010 }]
+		set yloc [expr { $yat * $scale }]
 		append condList "REC [expr { $condCount + 1 }]\
 			recTags$condCount $condCount $xat \
 			$yloc $width \
@@ -158,7 +164,7 @@ proc ::calcRL::genInputFile { nodename frequency } {
 	    }
 	    if { [$struct isa CircleConductors] } {
 		set radius [expr { [$struct cget -diameter] * $scale * 0.5 }]
-		set yloc [expr { $yat * $scale + 0.000010 }]
+		set yloc [expr { $yat * $scale }]
 		append circList "CIR [expr { $condCount + 1 }]\
 			recTags$condCount $condCount $xat \
 			$yloc $radius 0 "
@@ -174,7 +180,7 @@ proc ::calcRL::genInputFile { nodename frequency } {
 		set topwidth [expr { [$struct cget -topWidth] * $scale }]
 		set botwidth [expr { [$struct cget -bottomWidth] * $scale }]
 		set height [expr { [$struct cget -height] * $scale }]
-		set ybot [expr { $yat * $scale + 0.000010 }]
+		set ybot [expr { $yat * $scale }]
 		set ytop [expr { $ybot + $height }]
 		set xatT [expr { $xat - (($topwidth - $botwidth) * 0.5) }]
 		set xrgt [expr { $xat + $botwidth }]

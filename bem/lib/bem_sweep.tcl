@@ -3,7 +3,7 @@
 #  mmtl_sweep.tcl
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved.
-#  $Id: bem_sweep.tcl,v 1.6 2004/07/22 21:44:47 techenti Exp $
+#  $Id: bem_sweep.tcl,v 1.7 2004/07/28 15:40:53 techenti Exp $
 #
 #----------------------------------------------*-TCL-*------------
 
@@ -108,25 +108,28 @@ proc ::bem::runSweep { nodename cSegs pSegs } {
 	#--------------------------------------------------------
 	switch -exact -- $structClass {
 	    GroundPlane {
-		set parameters ""
+		set parameters {thickness}
 	    }
 	    DielectricLayer {
-		set parameters {permittivity permeability lossTangent thickness}
+		set parameters {permittivity permeability lossTangent
+		    thickness}
 	    }
 	    RectangleDielectric {
-		set parameters ""
+		set parameters {permittivity permeability lossTangent
+		    width height
+		    number pitch "x Offset" "y Offset"}
 	    }
 	    RectangleConductors {
-		set parameters {conductivity width height \
-				    number pitch "x Offset" "y Offset"
-		}
-
+		set parameters {conductivity width height
+		    number pitch "x Offset" "y Offset"}
 	    }
 	    TrapezoidConductors {
-		set parameters ""
+		set parameters {conductivity topwidth bottomWidth height
+		    number pitch "x Offset" "y Offset"}
 	    }
 	    CircleConductors {
-		set parameters ""
+		set parameters {conductivity diameter
+		    number pitch "x Offset" "y Offset"}
 	    }
 	    default {
 		puts stderr "Warning:  Structure $struct has unknown class $structClass"

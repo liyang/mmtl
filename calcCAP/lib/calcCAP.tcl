@@ -34,8 +34,9 @@ proc ::calcCAP::genInputFile { nodename } {
     set numDiels  0
     set condCount 1
     set condList ""
-    set circList "" 
+    set circList ""
     set trapList ""
+    set conductivity 5e7
     foreach struct $structureList {
         #--------------------------------------------------------------
         # Add the heights of the ground-planes and dielectrics.
@@ -47,6 +48,10 @@ proc ::calcCAP::genInputFile { nodename } {
 	    }
 	    continue
         }
+        if {[$struct isa RectangleDielectric]} {
+	    incr numDiels
+	    continue
+        }
 
         #--------------------------------------------------------------
         # Get the largest conductor width and the shortest conductor
@@ -56,14 +61,16 @@ proc ::calcCAP::genInputFile { nodename } {
 	if { $width > $totWidth } {
 	    set totWidth $width
 	}
-	set conductivity [$struct cget -conductivity]
 	if { [$struct isa RectangleConductors] } {
+	    set conductivity [$struct cget -conductivity]
 	    set nRectConds [expr { $nRectConds + [$struct cget -number] }]
 	}
 	if { [$struct isa CircleConductors] } {
+	    set conductivity [$struct cget -conductivity]
 	    set nCircConds [expr { $nCircConds + [$struct cget -number] }]
 	}
 	if { [$struct isa TrapezoidConductors] } {
+	    set conductivity [$struct cget -conductivity]
 	    set nTrapConds [expr { $nTrapConds + [$struct cget -number] }]
 	}
     }
@@ -162,27 +169,52 @@ proc ::calcCAP::genInputFile { nodename } {
     set trapList ""
     foreach struct $structureList {
         #--------------------------------------------------------------
-        # Add the heights of the ground-planes and dielectrics.
+        # Ground Planes and Dielectrics
         #--------------------------------------------------------------
-        if {[$struct isa GroundPlane] || [$struct isa DielectricLayer]} {
-	    if { [$struct isa DielectricLayer] } {
-		set thck [expr { [$struct cget -thickness] * $scale }]
-		set perm [$struct cget -permittivity]
-		set xat 0
-		set yloc [expr { ($yat * $scale) + 0.000010 }]
-		puts "yat: $yat  yloc: $yloc   totWidth: $totWidth" 
-		append dielList "DIELE $totCount\
-			recTags$dielCount $dielCount $xat \
-			$yloc [expr { $expWidth * $scale }] \
-			$thck $perm "
-		append dList "0\n"
-		append dList "$yloc\n"
-		append dList "[expr {$expWidth * $scale }]\n"
-		append dList "$thck\n"
-		append dList "$perm\n"
-		incr totCount
-	    }
+        if {[$struct isa GroundPlane]} {
 	    set yat [expr { $yat + [$struct height] }]
+	    continue
+        }
+	if { [$struct isa DielectricLayer] } {
+	    set thck [expr { [$struct cget -thickness] * $scale }]
+	    set perm [$struct cget -permittivity]
+	    set xat 0
+	    set width [expr {$expWidth * $scale }]
+	    set yloc [expr { $yat * $scale }]
+	    puts "yat: $yat  yloc: $yloc   totWidth: $totWidth"
+	    append dielList "DIELE $totCount\
+			recTags$dielCount $dielCount $xat \
+			$yloc $width \
+			$thck $perm "
+	    append dList "$xat\n"
+	    append dList "$yloc\n"
+	    append dList "$width\n"
+	    append dList "$thck\n"
+	    append dList "$perm\n"
+	    incr totCount
+	    #incr dielCount
+	    set yat [expr { $yat + [$struct height] }]
+	    continue
+        }
+	if { [$struct isa RectangleDielectric] } {
+	    set thck [expr { [$struct cget -height] * $scale }]
+	    set perm [$struct cget -permittivity]
+	    set xat [expr { ( $totWidth + \
+		[$struct cget -xOffset]) * $scale }]
+	    set width [expr {[$struct cget -width] * $scale}]
+	    set yloc [expr { $yat * $scale }]
+	    puts "yat: $yat  yloc: $yloc   totWidth: $totWidth"
+	    append dielList "DIELE $totCount\
+			recTags$dielCount $dielCount $xat \
+			$yloc $width \
+			$thck $perm "
+	    append dList "$xat\n"
+	    append dList "$yloc\n"
+	    append dList "$width\n"
+	    append dList "$thck\n"
+	    append dList "$perm\n"
+	    incr totCount
+	    #incr dielCount
 	    continue
         }
 
@@ -195,7 +227,7 @@ proc ::calcCAP::genInputFile { nodename } {
 	    if { [$struct isa RectangleConductors] } {
 		set width [expr { [$struct cget -width] * $scale }]
 		set height [expr { [$struct cget -height] * $scale }]
-		set yloc [expr { $yat * $scale + 0.000010 }]
+		set yloc [expr { $yat * $scale }]
 		append condList "REC $totCount\
 			recTags$condCount $condCount $xat \
 			$yloc $width \
@@ -211,7 +243,7 @@ proc ::calcCAP::genInputFile { nodename } {
 	    }
 	    if { [$struct isa CircleConductors] } {
 		set radius [expr { [$struct cget -diameter] * $scale * 0.5 }]
-		set yloc [expr { $yat * $scale + 0.000010 }]
+		set yloc [expr { $yat * $scale }]
 		append circList "CIR [expr { $condCount + 1 }]\
 			recTags$condCount $condCount $xat \
 			$yloc $radius "
@@ -226,7 +258,7 @@ proc ::calcCAP::genInputFile { nodename } {
 		set topwidth [expr { [$struct cget -topWidth] * $scale }]
 		set botwidth [expr { [$struct cget -bottomWidth] * $scale }]
 		set height [expr { [$struct cget -height] * $scale }]
-		set ybot [expr { $yat * $scale + 0.000010 }]
+		set ybot [expr { $yat * $scale }]
 		set ytop [expr { $ybot + $height }]
 		set xatT [expr { $xat - (($topwidth - $botwidth) * 0.5) }]
 		set xrgt [expr { $xat + $botwidth }]

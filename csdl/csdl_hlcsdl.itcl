@@ -25,7 +25,7 @@
 #  January 30, 2001
 #
 #  Copyright 2001-2004 Mayo Foundation.  All Rights Reserved.
-#  $Id: csdl_hlcsdl.itcl,v 1.5 2004/06/02 19:04:02 techenti Exp $
+#  $Id: csdl_hlcsdl.itcl,v 1.6 2004/07/28 15:40:14 techenti Exp $
 #
 # ----------------------------------------------------------------
 
@@ -80,7 +80,7 @@ itcl::class HLCSDLstructure {
 
 itcl::class GroundPlane {
     inherit HLCSDLstructure
-    public variable thickness 0.0
+    public variable thickness 1.0
 
     constructor { args } {
 	eval configure $args
@@ -90,6 +90,11 @@ itcl::class GroundPlane {
     }
 }
 
+itcl::configbody GroundPlane::thickness {
+    if { [info exists shape] } {
+	$shape configure -thickness $thickness
+    }
+}
 
 
 # ----------------------------------------------------------------

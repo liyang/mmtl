@@ -139,7 +139,7 @@ int nmmtl_fill_die_gaps(int orientation,int *segment_number,
         sprintf(smsg,"%g over %g to %g (meters)",
     	        list->at,list->start,list->end);
 
-	fprintf(stderr,"ELECTRO-W-DIEAIR Diel interf with AIR along %s",msg);
+	printf("ELECTRO-W-DIEAIR Diel interf with AIR along %s\n",msg);
       }
     
       /* create a new segment */
@@ -188,7 +188,7 @@ int nmmtl_fill_die_gaps(int orientation,int *segment_number,
       /* print warning message */
       sprintf(smsg,"%g over %g to %g (meters)",
   	      list->at,list->start,list->end);
-      fprintf(stderr,"ELECTRO-W-DIEAIR Diel interf with AIR along %s",msg);
+      printf("ELECTRO-W-DIEAIR Diel interf with AIR along %s\n",msg);
     
       new_segment = (struct dielectric_segments *)
         malloc(sizeof(struct dielectric_segments));

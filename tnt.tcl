@@ -19,12 +19,12 @@ exec wish "$0" "$@"
 #
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved.
-#  $Id: tnt.tcl,v 1.25 2004/07/22 20:00:58 techenti Exp $
+#  $Id: tnt.tcl,v 1.26 2004/07/29 16:45:10 techenti Exp $
 #
 #----------------------------------------------------------------
 
 
-set TNT_VERSION 1.2.0
+set TNT_VERSION 1.2.1
 
 #----------------------------------------------------------------
 #  From whence is this script run?

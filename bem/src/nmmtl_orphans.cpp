@@ -165,7 +165,7 @@ int nmmtl_orphans(CIRCLE_SEGMENTS_P *conductor_cs,
 	   die region - then, die == NULL and this is an error */
 	if(die == NULL)
 	{
-	  fprintf(stderr,"ELECTRO-W-ORPHAN_CS Cannot find dielectric constant for conductor line segment over (%f,%f) to (%f,%f).  Setting to AIR.",
+	  printf("ELECTRO-W-ORPHAN_CS Cannot find dielectric constant for conductor line segment over (%f,%f) to (%f,%f).  Setting to AIR.\n",
 		  ls->startx,ls->starty,ls->endx,ls->endy);
 	  ls->epsilon[0] = AIR_CONSTANT;
 	  ls->epsilon[1] = AIR_CONSTANT;
@@ -233,7 +233,7 @@ int nmmtl_orphans(CIRCLE_SEGMENTS_P *conductor_cs,
 	   die region - then, die == NULL and this is an error */
 	if(die == NULL)
 	{
-	  fprintf(stderr,"ELECTRO-W-ORPHAN_CS Cannot find dielectric constant for conductor circle segment centered at (%f,%f).  Setting to AIR.",cs->centerx,cs->centery);
+	  printf("ELECTRO-W-ORPHAN_CS Cannot find dielectric constant for conductor circle segment centered at (%f,%f).  Setting to AIR.\n",cs->centerx,cs->centery);
 	  cs->epsilon[0] = AIR_CONSTANT;
 	  cs->epsilon[1] = AIR_CONSTANT;
 	  

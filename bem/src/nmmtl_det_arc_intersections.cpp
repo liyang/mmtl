@@ -2176,7 +2176,7 @@ int nmmtl_determine_arc_intersectio(CIRCLE_SEGMENTS_P *circle_segments,
 	  {
 	    
 	    fprintf(stderr,"ELECTRO-F-INTERNAL Internal error:  checking intersections between conductors and dielectrics; Choices for circle segment/die intersection \
-types fell through");
+types fell through\n");
 	    return(FAIL);
 	  }
 	  

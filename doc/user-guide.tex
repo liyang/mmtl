@@ -9,7 +9,7 @@
 %  Bob Techentin
 %  June 23, 2004
 %
-%  $Id: user-guide.tex,v 1.5 2004/07/26 13:39:09 techenti Exp $
+%  $Id: user-guide.tex,v 1.6 2004/07/29 13:15:09 techenti Exp $
 %
 
 
@@ -602,10 +602,15 @@ parameters.  You may choose either the ``RL'' calculator for
 resistance and inductance, or the ``CAP'' calculator for capacitance.
 
 The ``RL'' calculator dialog allows you to enter a number of frequency
-points at which you would like the parameters computed.  The ``CAP''
-calculator simply computes the line-to-line capacitance, which is
-relatively independent of frequency.
+points at which you would like the parameters computed.  Simply enter
+the frequencies, in hertz, separated by spaces (e.g., ``1e9 2e9
+3e9'').  The ``CAP'' calculator simply computes the line-to-line
+capacitance, which is relatively independent of frequency.
 
+These simulators have not been completely generalized.  They are
+limited to a single ground plane, so stripline simulations will be
+incorrect.  They also are also limited to planar dielectric layers,
+and will crash if attempting to simulate rectangle dielectrics.
 
 
 %-----------------------------------------------------------

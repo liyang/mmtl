@@ -140,7 +140,7 @@ float nmmtl_find_nu(float epsilon1,float epsilon2,float theta1,float theta2)
   if(IND == 0) return(nu);
   else
   {
-    fprintf(stderr,"ELECTRO-F-NOSOLUTION No solution for transcendental equation for edge effects was found, error=%f",ERROR);
+    fprintf(stderr,"ELECTRO-F-NOSOLUTION No solution for transcendental equation for edge effects was found, error=%f\n",ERROR);
     
     return(-1.0F);
   }

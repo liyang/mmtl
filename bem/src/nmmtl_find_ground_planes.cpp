@@ -97,7 +97,7 @@ int nmmtl_find_ground_planes(struct dielectric *dielectrics,
 {
   if(dielectrics == NULL)
   {
-    fprintf(stderr,"ELECTRO-F-ZERODIE No dielectric layer found - at least 1 is required");
+    fprintf(stderr,"ELECTRO-F-ZERODIE No dielectric layer found - at least 1 is required\n");
     return(FAIL);
   }
   *top_of_bottom_plane = dielectrics->y0;
@@ -119,7 +119,7 @@ int nmmtl_find_ground_planes(struct dielectric *dielectrics,
   }
   
 #ifdef DIAG_GND_PLANES
-  fprintf(stderr,"ground planes:\n top of bottom: %g\n bottom of top: %g\n\
+  printf("ground planes:\n top of bottom: %g\n bottom of top: %g\n\
  left: %g\n right: %g\n",*top_of_bottom_plane,*bottom_of_top_plane,
 	  *left,*right);
 #endif

@@ -179,9 +179,10 @@ int main (int argc, char **argv)
   dump_file = fopen("nmmtl.dump","w");
   //#endif
 
-  // set line buffering on stdout so that we behave nicely
-  //  when run at the end of a pipeline.
+  //  set line buffering on stdout and stderr so that
+  //  we behave nicely when run at the end of a pipeline.
   setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+  setvbuf(stderr, NULL, _IOLBF, BUFSIZ);
   
 
   //////////////////////////////////////////////////////////////

@@ -438,7 +438,7 @@ int nmmtl_overlap_parallel_seg(struct dielectric_sub_segments *list1,
       break;
 
     default:
-      fprintf(stderr,"ELECTRO-F-INTERNAL Internal error Corrupt data structures when determining overlap of dielectric segments; illegal state for check of parallel segments");
+      fprintf(stderr,"ELECTRO-F-INTERNAL Internal error Corrupt data structures when determining overlap of dielectric segments; illegal state for check of parallel segments\n");
       overlap = 2;
       break;
 

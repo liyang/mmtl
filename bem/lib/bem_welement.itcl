@@ -23,7 +23,7 @@
 #  June 11, 2002
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved.
-#  $Id: bem_welement.itcl,v 1.4 2004/05/05 19:30:16 techenti Exp $
+#  $Id: bem_welement.itcl,v 1.5 2004/07/28 13:01:27 techenti Exp $
 #
 # --------------------------------------------------------------------
 
@@ -100,6 +100,7 @@ itcl::class Welement {
     method visitStackup { stackup x y }
     method visitGroundPlane { groundPlane x y }
     method visitDielectricLayer { dielectricLayer x y }
+    method visitRectangleDielectric { rectangleDielectric x y }
     method visitRectangleConductors { rectangleConductors x y }
     method visitTrapezoidConductors { trapezoidConductors x y }
     method visitCircleConductors { circleConductors x y }
@@ -607,6 +608,7 @@ itcl::body Welement::visitStackup { stackup x y } {
 
 itcl::body Welement::visitGroundPlane { groundPlane x y } {}
 itcl::body Welement::visitDielectricLayer { dielectricLayer x y } {}
+itcl::body Welement::visitRectangleDielectric { rectangleDielectric x y } {}
 
 #---------------------------------------------------------------
 #  Save the name of the HLCSDL object, as we'll need it

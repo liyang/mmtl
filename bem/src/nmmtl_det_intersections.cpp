@@ -682,7 +682,7 @@ int nmmtl_determine_intersections(LINE_SEGMENTS_P *line_segments,
 		  (it & (IP_C1I1 | IP_C1I2))     ) cl = CL_SD1C1;
 	  else
 	  {
-	    fprintf(stderr,"ELECTRO-F-INTERNAL Internal error:  checking intersections between conductors and dielectrics; Choices for colinear intersection types fell through");
+	    fprintf(stderr,"ELECTRO-F-INTERNAL Internal error:  checking intersections between conductors and dielectrics; Choices for colinear intersection types fell through\n");
 	    return(FAIL);
 	  }
 	  
