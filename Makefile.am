@@ -32,7 +32,7 @@ bin_SCRIPTS = tnt.tcl tnt
 #---------------------------------------------------------------
 #  Examples to be installed
 #---------------------------------------------------------------
-examplesdir = $(prefix)/examples
+examplesdir = $(pkgdatadir)/examples
 examples_DATA = \
 	examples/9-7-00.xsctn \
 	examples/coplanar.xsctn \
@@ -51,7 +51,7 @@ examples_DATA = \
 #  a prefix.  If not, then I suppose README will go into
 #  /usr.
 #---------------------------------------------------------------
-appdocsdir = $(prefix)
+appdocsdir = $(pkgdatadir)
 appdocs_DATA = \
 	AUTHORS$(TXTEXT) \
 	COPYING$(TXTEXT) \

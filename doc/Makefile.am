@@ -43,7 +43,7 @@ AUTOMAKE_OPTIONS = foreign
 #
 #---------------------------------------------------------------
 
-docdir = $(prefix)/doc
+docdir = $(pkgdatadir)
 doc_DATA = \
 	user-guide.pdf 
 
