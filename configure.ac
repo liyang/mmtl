@@ -11,7 +11,7 @@
 #  October 3, 2002
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved
-#  $Id: configure.ac,v 1.10 2004/07/29 16:45:10 techenti Exp $
+#  $Id: configure.ac,v 1.11 2004/09/10 20:04:53 techenti Exp $
 #
 #----------------------------------------------------------------
 
@@ -20,7 +20,7 @@
 #  Declare the package name and version.
 #  All the bouquets and brickbats go to Sharon. :-)
 #----------------------------------------------------------------
-AC_INIT(TNT MMTL, 1.2.1, techentin.robert@mayo.edu)
+AC_INIT(TNT MMTL, 1.2.2, techentin.robert@mayo.edu)
 
 #----------------------------------------------------------------
 #  Give autoconf a point of reference, and tell it that

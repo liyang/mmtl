@@ -1,5 +1,34 @@
 ChangeLog
 
+ 
+2004-09-10 techenti
+
+	Tagged TNT 1.2.1
+
+	* calcCAP/lib/calcCAP.tcl 1.8 (changed): Check for zero thickness
+	        dielectrics and ground planes.
+
+
+        * gui/gui_initialize.tcl 1.29 (changed): Fixed sourceforge bug
+	        1015570 "Can't run Wavelet RL calculator".  If
+	        [auto_execok] found 'tclsh', then everything was fine, but
+	        you need to make a list out of
+                [info nameofexecutable] to protect it from spaces in the
+		path name.  
+
+	* bem/lib/bem_welement.itcl 1.6 (changed): Fixed unit conversion
+		bug, sourceforge bug 1025984 "Bugs in Rs and R0."
+ 
+2004-08-02 techenti
+	
+        * gui/gui_initialize.tcl 1.28 (changed): Corrected w-element
+	        object creation/destruction. (sourceforge tracker 1001977)
+ 
+2004-07-26 techenti
+	
+        * gui/canvas_functions.tcl 1.7 (changed): Removed dependence on
+	        tcllib (fileutils::tempfile).
+ 
 
 2004-07-29 techenti
 

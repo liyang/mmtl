@@ -42,6 +42,9 @@ proc ::calcCAP::genInputFile { nodename } {
         # Add the heights of the ground-planes and dielectrics.
         #--------------------------------------------------------------
         if {[$struct isa GroundPlane] || [$struct isa DielectricLayer]} {
+	    if { [$struct height] == 0.0 } {
+		error "Invalid zero height for $struct"
+	    }
 	    set totHeight [expr {$totHeight + [$struct height]}]
 	    if { [$struct isa DielectricLayer] } {
 		incr numDiels

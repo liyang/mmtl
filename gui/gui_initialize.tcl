@@ -14,7 +14,7 @@
 #  The actual GUI is constructed by [createElements]
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved
-#  $Id: gui_initialize.tcl,v 1.27 2004/07/22 19:13:01 techenti Exp $
+#  $Id: gui_initialize.tcl,v 1.29 2004/09/10 19:51:10 techenti Exp $
 #
 #----------------------------------------------------------------
 
@@ -278,9 +278,9 @@ proc ::gui::writeHspiceW {} {
     #  Create the Welement object, and ask it for the
     #  W-element string
     #--------------------------------------------------------------
-    catch {delete w}
-    Welement w
-    set wmodel [w welementString ${::gui::_nodename}.result]
+    set w [Welement #auto]
+    set wmodel [$w welementString ${::gui::_nodename}.result]
+    itcl::delete object $w
 
     #--------------------------------------------------------------
     #  Write the W-element file and display it to the user
@@ -575,7 +575,7 @@ proc ::gui::runCalcRL {} {
 	#  ... finally ... we can execute the script
 	set tclsh [auto_execok tclsh]
 	if { $tclsh eq "" } {
-	    set tclsh [info nameofexecutable]
+	    set tclsh [list [info nameofexecutable]]
 	}
 	set pipe [open "|$tclsh \"$scriptfilename\"" "r+"]
 

@@ -14,7 +14,7 @@
 #  The MMTL results file provides electrostatic inductance
 #  (B) and inductance (L) matrices.
 #
-#  The Stackup object provides conductor areas and 
+#  The Stackup object provides conductor areas and
 #  conductivities which are used to compute DC and AC
 #  resistance.
 #
@@ -23,14 +23,14 @@
 #  June 11, 2002
 #
 #  Copyright 2002-2004 Mayo Foundation.  All Rights Reserved.
-#  $Id: bem_welement.itcl,v 1.5 2004/07/28 13:01:27 techenti Exp $
+#  $Id: bem_welement.itcl,v 1.6 2004/09/10 19:23:02 techenti Exp $
 #
 # --------------------------------------------------------------------
 
 
 # --------------------------------------------------------------------
 #
-#  Like several other components of the MMTL simulation suite, 
+#  Like several other components of the MMTL simulation suite,
 #  the Welement class acts as a visitor to the CSDL cross section
 #  description.
 #
@@ -86,7 +86,7 @@ itcl::class Welement {
 
     #  Produce and return a W element description
     #  (as a string)
-    method welementString { mmtlResultsFile } 
+    method welementString { mmtlResultsFile }
 
     #  Helper methods
     private method addLine { string }
@@ -196,7 +196,7 @@ itcl::body Welement::welementString {mmtlResultsFile} {
 
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              addLine
 #
 #  DESCRIPTION
@@ -211,7 +211,7 @@ itcl::body Welement::addLine { string } {
 
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              addMatrix
 #
 #  DESCRIPTION
@@ -222,17 +222,18 @@ itcl::body Welement::addLine { string } {
 #
 #-------------------------------------------------------------
 itcl::body Welement::addMatrix { matrixName } {
+    upvar $matrixName m
     for {set i 0} {$i<$N} {incr i} {
 	for {set j 0} {$j<=$i} {incr j} {
-	    append welement [format "%g\t" [set ${matrixName}($i,$j)]]
+	    append welement [format "%g\t" $m($i,$j)]
 	}
 	append welement "\n"
     }
 }
-	
+
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              warningMessage
 #
 #  DESCRIPTION
@@ -249,13 +250,13 @@ itcl::body Welement::warningMessage { msgText  } {
 
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              Welement::initialize
 #
 #  DESCRIPTION
 #
 #   This method initializes the object's global data,
-#   removing any previous data. 
+#   removing any previous data.
 #
 #-------------------------------------------------------------
 itcl::body Welement::initialize { } {
@@ -292,12 +293,12 @@ itcl::body Welement::initialize { } {
 
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              readMMTLfile
 #
 #  DESCRIPTION
 #
-#   This method reads the specified MMTL results file and 
+#   This method reads the specified MMTL results file and
 #   sets C0, L0, and R0 arrays.  It copies leading text from
 #   the SIM results into the  headerText variable and defines
 #   the number of conductors, N.  This proc also sets default
@@ -348,19 +349,19 @@ itcl::body Welement::readMMTLfile { filename } {
     #  at the beginning of each matrix section.  Each section
     #  is led by a line like:
     #   B(Active Signal, Passive Signal)
-    #  followed by NxN matrix entries.  
+    #  followed by NxN matrix entries.
     #
-    #  Note that the signal names are in order for generated 
-    #  cross sections, but they could also be arbitrarily named, 
-    #  so we save the signal names in the headerText.  We also 
-    #  store the order of the signal names so that we can later 
+    #  Note that the signal names are in order for generated
+    #  cross sections, but they could also be arbitrarily named,
+    #  so we save the signal names in the headerText.  We also
+    #  store the order of the signal names so that we can later
     #  reconstruct each signal's position in the matrix.
     #
-    #  Note that we could calculate capacitance matrix from the 
+    #  Note that we could calculate capacitance matrix from the
     #  electrostatic induction matrix, B, but the HSPICE W element
-    #  is really expecting the B matrix for C0.  Self Capacitance 
-    #  (diagonal elements) of the capacitance matrix would be 
-    #  the sum of the row (e.g., C11=B11+B12), while mutual 
+    #  is really expecting the B matrix for C0.  Self Capacitance
+    #  (diagonal elements) of the capacitance matrix would be
+    #  the sum of the row (e.g., C11=B11+B12), while mutual
     #  capacitance (off-diagonal elements) would be the negative
     #  of the corresponding induction value (e.g., C12=-B12).
     #-------------------------------------------------------------
@@ -392,7 +393,7 @@ itcl::body Welement::readMMTLfile { filename } {
 		    }
 		}
 	    }
-	    
+
 	    "Rdc(Active" {
 		#  Copy "Rdc" matrix into R0
 		for {set i 0} {$i<$N} {incr i} {
@@ -431,7 +432,7 @@ itcl::body Welement::readMMTLfile { filename } {
 
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              Welement::computeLosses
 #
 #  DESCRIPTION
@@ -439,7 +440,7 @@ itcl::body Welement::readMMTLfile { filename } {
 #   This method computes the loss factors for the MMTL
 #   simulation results (which are loss free) by visiting
 #   the specified layer stackup, and computing both DC and
-#   AC losses from the conductor circumference, area 
+#   AC losses from the conductor circumference, area
 #   and conductivity.
 #
 #   The loss values are stored in R0 and Rs.
@@ -481,11 +482,22 @@ itcl::body Welement::computeLosses { } {
 	puts " to $name"
 
 	#--------------------------------------------------------------
-	#  Get usefule quantities
+	#  Get usefull quantities
 	#--------------------------------------------------------------
-	set area [units::convert "$conductorArea($name)$units^2" "meter^2"]
-	set circ [units::convert "$conductorCircumference($name)$units" "meter"]
-	set cond [units::convert $conductorConductivity($name) "siemens/meter"]
+	set area $conductorArea($name)
+	set circ $conductorCircumference($name)
+	set cond $conductorConductivity($name)
+
+	#--------------------------------------------------------------
+	#  Convert to SI units.
+	#  We know that area and circ are in default units and must
+	#  be converted.  But we convert cond only if necessary.
+	#--------------------------------------------------------------
+	set area [units::convert "$area$units^2" "meters^2"]
+	set circ [units::convert "$circ$units"   "meters"]
+	if { ! [string is double $cond] } {
+	    set cond [units::convert $cond "siemens/meter"]
+	}
 
 	#--------------------------------------------------------------
 	#  Compute values according to formulas
@@ -526,11 +538,11 @@ itcl::body Welement::computeLosses { } {
 	    }
 	}
     }
-	
+
 }
 
 #-------------------------------------------------------------
-#  
+#
 #  NAME              do_help
 #
 #  DESCRIPTION
