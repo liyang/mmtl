@@ -26,11 +26,8 @@
  */
 
 #include "nmmtl.h"
-#ifdef FORTRAN_UNDERBARS
-#define FMIN fmin_
-#else
-#define FMIN fmin
-#endif
+#define FMIN F77_FUNC(fmin,FMIN)
+
 /*
  *******************************************************************
  **  STRUCTURE DECLARATIONS AND TYPE DEFINTIONS
