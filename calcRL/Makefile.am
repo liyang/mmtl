@@ -31,7 +31,8 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglib_SCRIPTS = \
+libpkgdir = $(pkglibdir)
+libpkg_SCRIPTS = \
 	lib/calcRL.tcl \
 	lib/calcRL_exe.tcl \
 	lib/pkgIndex.tcl

@@ -30,7 +30,8 @@ AUTOMAKE_OPTIONS = foreign
 #---------------------------------------------------------------
 # tcl/tk scripts to be installed.
 #---------------------------------------------------------------
-pkglib_SCRIPTS = \
+libpkgdir = $(pkglibdir)
+libpkg_SCRIPTS = \
 	canvas_functions.tcl \
 	gui.tcl \
 	gui_build.tcl \
@@ -48,7 +49,7 @@ pkglib_SCRIPTS = \
 #---------------------------------------------------------------
 #  Data files to be installed
 #---------------------------------------------------------------
-pkglib_DATA = \
+libpkg_DATA = \
 	MayoSPPDGlogo.gif \
 	conductivity.list \
 	loss_tangent.list \

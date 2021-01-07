@@ -33,7 +33,8 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 #  Only one script that needs to be installed.
 #---------------------------------------------------------------
-pkglib_SCRIPTS = \
+libpkgdir = $(pkglibdir)
+libpkg_SCRIPTS = \
 	pkgIndex.tcl
 
 #---------------------------------------------------------------

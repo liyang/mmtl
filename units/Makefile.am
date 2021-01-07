@@ -31,7 +31,8 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglib_SCRIPTS = \
+libpkgdir = $(pkglibdir)
+libpkg_SCRIPTS = \
 	units.tcl \
 	pkgIndex.tcl \
 	units.html

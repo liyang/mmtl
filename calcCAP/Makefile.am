@@ -30,7 +30,8 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglib_SCRIPTS = \
+libpkgdir = $(pkglibdir)
+libpkg_SCRIPTS = \
 	lib/calcCAP_exe.tcl  \
 	lib/calcCAP.tcl \
 	lib/epl.bit \

@@ -33,13 +33,14 @@ AUTOMAKE_OPTIONS = foreign
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglib_SCRIPTS = \
+libpkgdir = $(pkglibdir)
+libpkg_SCRIPTS = \
 	console.tcl \
 	console_demo.tcl \
 	tkcon.tcl \
 	pkgIndex.tcl
 
-pkglib_DATA = \
+libpkg_DATA = \
 	README
 
 #---------------------------------------------------------------
