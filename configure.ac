@@ -46,7 +46,7 @@ AM_CONDITIONAL(WINDOWS, [[[[ $host = *cygwin* ]]]] )
 
 
 
-AC_CONFIG_SUBDIRS(bem calcCAP calcRL csdl gui units sppdgTcllib)
+AC_CONFIG_SUBDIRS(bem calcCAP calcRL csdl doc gui units sppdgTcllib)
  
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([doc/Makefile])
