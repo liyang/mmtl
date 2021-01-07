@@ -21,7 +21,7 @@ AC_INIT(ADDRESSDIALOG, 1.0, schrauf@mayo.edu)
 #  we're going to use automake later.
 #----------------------------------------------------------------
 AC_CONFIG_SRCDIR
-AM_INIT_AUTOMAKE(addressDialog, 1.0)
+AM_INIT_AUTOMAKE
 
 
 #----------------------------------------------------------------

@@ -28,7 +28,7 @@ AC_INIT(getFilePreview, 1.0, techentin.robert@mayo.edu)
 #  we're going to use automake later.
 #----------------------------------------------------------------
 AC_CONFIG_SRCDIR
-AM_INIT_AUTOMAKE(getFilePreview, 1.0)
+AM_INIT_AUTOMAKE
 
 
 #----------------------------------------------------------------

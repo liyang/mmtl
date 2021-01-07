@@ -29,7 +29,7 @@ AC_INIT(SGRAPH, 1.0, zahn.sharon@mayo.edu)
 #  we're going to use automake later.
 #----------------------------------------------------------------
 AC_CONFIG_SRCDIR
-AM_INIT_AUTOMAKE(sgraph, 1.0)
+AM_INIT_AUTOMAKE
 
 
 #----------------------------------------------------------------

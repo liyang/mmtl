@@ -65,7 +65,7 @@ appdocs_DATA = \
 #---------------------------------------------------------------
 if WINDOWS
 TXTEXT=.txt
-%$(TXTEXT) : %
+$(TXTEXT).:
 	cp $< $@
 	unix2dos $@
 endif

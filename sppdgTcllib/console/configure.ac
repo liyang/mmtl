@@ -29,7 +29,7 @@ AC_INIT(console, 1.1, techentin.robert@mayo.edu)
 #  we're going to use automake later.
 #----------------------------------------------------------------
 AC_CONFIG_SRCDIR
-AM_INIT_AUTOMAKE(console, 1.1)
+AM_INIT_AUTOMAKE
 
 
 #----------------------------------------------------------------
