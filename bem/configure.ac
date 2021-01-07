@@ -38,25 +38,21 @@ case "${host}" in
 *hpux10*)
 	#  On HP-UX 10.0
 	#  Choose native compilers aCC, and f90.
-	#  Also use the FORTRAN_UNDERBARS mode, to avoid
-	#  conflicts with NSWC's FMIN and C runtime fmin().
 	#  Undefine "inline" macro, because we will get
 	#  thousands of duplicates from math.h on this
 	#  older aCC compiler.
 	CC=cc
 	CXX=aCC
-	AM_CXXFLAGS="+O2 -DFORTRAN_UNDERBARS -Uinline"
+	AM_CXXFLAGS="+O2 -Uinline"
 	F77=f90
 	AM_FFLAGS="+ppu -O2"
 ;;
 *hpux11*)
 	#  On HP-UX 11.0
 	#  Choose native compilers aCC, and f90.
-	#  Also use the FORTRAN_UNDERBARS mode, to avoid
-	#  conflicts with NSWC's FMIN and C runtime fmin().
 	CC=cc
 	CXX=aCC
-	AM_CXXFLAGS="+O2 -DFORTRAN_UNDERBARS"
+	AM_CXXFLAGS="+O2"
 	F77=f90
 	AM_FFLAGS="+ppu -O2"
 ;;
@@ -70,7 +66,6 @@ case "${host}" in
 	CC="gcc -mno-cygwin"
 	CXX="g++ -mno-cygwin"
 	F77="g77 -mno-cygwin"
-	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
 ;;
 esac
 AC_SUBST(AM_CXXFLAGS)

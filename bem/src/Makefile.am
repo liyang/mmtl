@@ -1,7 +1,5 @@
 bin_PROGRAMS = xnmmtl gnmmtl
 
-AM_CXXFLAGS = -DFORTRAN_UNDERBARS
-
 F77 = f90
 
 FFLAGS=+ppu -O2

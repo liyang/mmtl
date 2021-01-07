@@ -37,7 +37,7 @@ case "${host}" in
 *hpux11*)
 	CC=cc
 	CXX=aCC
-	CXXFLAGS="+O3 -DFORTRAN_UNDERBARS"
+	CXXFLAGS="+O3"
 	F77=f90
 	FFLAGS="+ppu -O2"
  ;;
@@ -51,7 +51,6 @@ case "${host}" in
 	CC="gcc -mno-cygwin"
 	CXX="g++ -mno-cygwin"
 	F77="g77 -mno-cygwin"
-	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
 ;;
 esac
 
