@@ -72,13 +72,6 @@ case "${host}" in
 	F77="g77 -mno-cygwin"
 	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
 ;;
-*linux*)
-	#  For Linux, all flavors...
-	#  Use the GNU compilers for C++ and FORTRAN.
-	CXX="g++"
-	F77="g77"
-	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
-;;
 esac
 AC_SUBST(AM_CXXFLAGS)
 AC_SUBST(AM_FFLAGS)
